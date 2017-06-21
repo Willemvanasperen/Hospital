@@ -24,7 +24,7 @@ function createSave()
 	header("Location:" . URL . "client/index");
 }
 
-function edit($id)
+function edit($client_id)
 {
 	render("client/edit", array(
 		'client' => getClient($id)
@@ -41,12 +41,12 @@ function editSave()
 	header("Location:" . URL . "client/index");
 } 
 
-function delete($id)
+function delete($client_id)
 {
-	if (!deleteClient($id)) {
+	if (!deleteClient($client_id)) {
 		header("Location:" . URL . "error/index");
 		exit();
 	}
 
-	header("Location:" . URL . "birthday/index");
+	header("Location:" . URL . "client/index");
 }
