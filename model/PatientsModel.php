@@ -4,7 +4,7 @@ function getPatient($id)
 {
 	$db = openDatabaseConnection();
 
-	$sql = "SELECT * FROM patients WHERE id = :id";
+	$sql = "SELECT * FROM patients WHERE patient_id = :id";
 	$query = $db->prepare($sql);
 	$query->execute(array(
 		":id" => $id));
@@ -18,7 +18,7 @@ function getAllPatients()
 {
 	$db = openDatabaseConnection();
 
-	$sql = "SELECT * FROM patients order by name, species_id";
+	$sql = "SELECT * FROM patients";
 	$query = $db->prepare($sql);
 	$query->execute();
 

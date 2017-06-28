@@ -3,22 +3,19 @@
 function getSpecies($species_id) 
 {
 	$db = openDatabaseConnection();
-
-	$sql = "SELECT * FROM speciess WHERE species_id = :species_id";
+	$sql = "SELECT * FROM species WHERE species_id = :species_id";
 	$query = $db->prepare($sql);
 	$query->execute(array(
 		":species_id" => $species_id));
-
 	$db = null;
-
 	return $query->fetch();
 }
 
-function getAllSpeciess() 
+function getAllSpecies() 
 {
 	$db = openDatabaseConnection();
 
-	$sql = "SELECT * FROM speciess order by species_description";
+	$sql = "SELECT * FROM species";
 	$query = $db->prepare($sql);
 	$query->execute();
 
@@ -29,7 +26,7 @@ function getAllSpeciess()
 
 function editSpecies() 
 {
-	$species_description = isset($_POST['species_description']) ? $_POST['species_description'] : null;
+	$species_description = isset($_POST['species']) ? $_POST['species'] : null;
 	$species_id = isset($_POST['species_id']) ? $_POST['species_id'] : null;
 	
 	if (strlen($species_description) == 0) {
@@ -37,8 +34,7 @@ function editSpecies()
 	}
 	
 	$db = openDatabaseConnection();
-
-	$sql = "UPDATE speciess SET species_description = :species_description, WHERE species_id = :species_id";
+	$sql = "UPDATE species SET species_description = :species_description WHERE species_id = :species_id";
 	$query = $db->prepare($sql);
 	$query->execute(array(
 		':species_description' => $species_description,
@@ -57,7 +53,7 @@ function deleteSpecies($species_id = null)
 	
 	$db = openDatabaseConnection();
 
-	$sql = "DELETE FROM speciess WHERE species_id=:species_id ";
+	$sql = "DELETE FROM species WHERE species_id=:species_id ";
 	$query = $db->prepare($sql);
 	$query->execute(array(
 		':species_id' => $species_id));
@@ -67,20 +63,20 @@ function deleteSpecies($species_id = null)
 	return true;
 }
 
-function createSpecies() 
+function addSpecies() 
 {
-	$species_description = isset($_POST['species_description']) ? $_POST['species_description'] : null;
+	$species = isset($_POST['species']) ? $_POST['species'] : null;
 
-	if (strlen($species_description) == 0) {
+	if (strlen($species) == 0) {
 		return false;
 	}
 	
 	$db = openDatabaseConnection();
 
-	$sql = "INSERT INTO speciess(species_description) VALUES (:species_description)";
+	$sql = "INSERT INTO species(species_description) VALUES (:species)";
 	$query = $db->prepare($sql);
 	$query->execute(array(
-		':species_description' => $species_description));
+		':species' => $species));
 
 	$db = null;
 	

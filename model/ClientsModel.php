@@ -1,6 +1,6 @@
 <?php
 
-function getClient($id) 
+function getClient($client_id) 
 {
 	$db = openDatabaseConnection();
 
@@ -18,7 +18,7 @@ function getAllClients()
 {
 	$db = openDatabaseConnection();
 
-	$sql = "SELECT * FROM clients order by client_firstname, client_lastname";
+	$sql = "SELECT * FROM clients";
 	$query = $db->prepare($sql);
 	$query->execute();
 

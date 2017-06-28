@@ -4,19 +4,18 @@ require(ROOT . "model/SpeciesModel.php");
 
 function index()
 {
-	render("species/index", array(
-		'speciess' => getAllSpieciess()
-	));
+	render("species/index" , array('species' => getAllSpecies()
+		));
 }
 
-function create()
+function add()
 {
-	render("species/create");
+	render("species/add");
 }
 
-function createSave()
+function addSave()
 {
-	if (!createSpecies()) {
+	if (!addSpecies()) {
 		header("Location:" . URL . "error/index");
 		exit();
 	}
